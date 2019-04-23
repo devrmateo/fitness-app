@@ -1,31 +1,13 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import {
-FontAwesome } from '@expo/vector-icons'
+import React from 'react'
+import { View } from 'react-native'
+import AddEntry from './components/AddEntry'
 
 export default class App extends React.Component {
-
-  componentDidMount() {
-    console.log('before')
-    debugger
-    console.log('after')
-  }
-
   render() {
     return (
-      <View style={styles.container}>
-        <FontAwesome name='soccer-ball-o' size={40} color='maroon'/>
-
+      <View>
+        <AddEntry />
       </View>
-    );
+    )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
