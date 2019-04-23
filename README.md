@@ -16,7 +16,7 @@ In order to run this application on your local computer, do the following:
      - Navigate to the project's root directory, and run the following commands:
           * `npm install`
           * `npm start`
-     - Visit the site in your browser at `http://localhost:3000`.
+     - Visit the site in your browser at `http://localhost:19002/`.
 
 # Dependencies
 ___
