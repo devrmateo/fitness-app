@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, TouchableOpacity, Text } from 'react-native'
 import { getMetricMetaInfo, timeToString } from '../utils/helpers'
 import UdaciSlider from './Slider'
-import Steppers from './Steppers'
+import UdaciSteppers from './Steppers'
 import DateHeader from './DateHeader'
 
 function SubmitBtn ({ onPress }) {
@@ -94,7 +94,7 @@ export default class AddEntry extends Component {
                     onChange={(value) => this.slide(key, value)}
                     {...rest}
                   />
-                : <Steppers
+                : <UdaciSteppers
                     value={value}
                     onIncrement={(key) => this.increment}
                     onDecrement={(key) => this.decrement}
