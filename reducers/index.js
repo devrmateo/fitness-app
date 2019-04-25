@@ -6,12 +6,12 @@ function entries (state = {}, action) {
       return {
         ...state,
         ...action.entries,
-    }
+      }
     case ADD_ENTRY :
       return {
         ...state,
         ...action.entry,
-    }
+      }
     default :
       return state
   }
