@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { View, TouchableOpacity, Text } from 'react-native'
-import { getMetricMetaInfo, timeToString } from '../utils/helpers'
+import { getMetricMetaInfo, timeToString, getDailyReminderValue } from '../utils/helpers'
 import UdaciSlider from './Slider'
 import UdaciSteppers from './Steppers'
 import DateHeader from './DateHeader'
 import { Ionicons } from '@expo/vector-icons'
 import TextButton from './TextButton'
 import { submitEntry, removeEntry } from '../utils/api'
+import { addEntry,  } from '../actions'
 
 function SubmitBtn ({ onPress }) {
   return (
@@ -18,7 +20,7 @@ function SubmitBtn ({ onPress }) {
   )
 }
 
-export default class AddEntry extends Component {
+class AddEntry extends Component {
   state = {
     run: 0,
     bike: 0,
@@ -61,7 +63,10 @@ export default class AddEntry extends Component {
     const key = timeToString()
     const entry = this.state
 
-    //Update Redux
+    const { addEntry } = this.props
+    addEntry({
+      [key]: entry
+    })
 
     this.setState({
       run: 0,
@@ -82,8 +87,10 @@ export default class AddEntry extends Component {
   reset = () => {
     const key = timeToString()
 
-    //Update Redux
-
+    const { addEntry } = this.props
+    addEntry({
+      [key]: getDailyReminderValue()
+    })
     //Route to home
 
     removeEntry(key)
@@ -91,8 +98,9 @@ export default class AddEntry extends Component {
 
   render() {
     const metaInfo = getMetricMetaInfo()
+    const { alreadyLogged } = this.props
 
-    if (this.props.alreadyLogged) {
+    if (alreadyLogged) {
       return (
         <View>
           <Ionicons
@@ -124,8 +132,8 @@ export default class AddEntry extends Component {
                   />
                 : <UdaciSteppers
                     value={value}
-                    onIncrement={(key) => this.increment}
-                    onDecrement={(key) => this.decrement}
+                    onIncrement={() => this.increment(key)}
+                    onDecrement={() => this.decrement(key)}
                     {...rest}
                   />
               }
@@ -137,3 +145,13 @@ export default class AddEntry extends Component {
     )
   }
 }
+
+function mapStateToProps (state) {
+  const key = timeToString()
+
+  return {
+    alreadyLogged: state[key] && typeof state[key].today === 'undefined'
+  }
+}
+
+export default connect(mapStateToProps, { addEntry })(AddEntry)
