@@ -12,6 +12,7 @@ import { white, purple } from './utils/colors'
 import { Constants } from 'expo'
 import EntryDetail from './components/EntryDetail'
 import Live from './components/Live'
+import { setLocalNotification } from './utils/helpers'
 
 function UdaciStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -102,6 +103,8 @@ export default class App extends Component {
 
   componentDidMount() {
     YellowBox.ignoreWarnings(['Warning: Failed prop type: The prop `bounces` is marked as required in `PagerAndroid`, but its value is `undefined`.'])
+
+    setLocalNotification()
   }
 
   render() {
