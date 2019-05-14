@@ -1,5 +1,5 @@
-import React from 'react'
-import { View, Platform, StatusBar } from 'react-native'
+import React, { Component } from 'react'
+import { View, Platform, StatusBar, YellowBox } from 'react-native'
 import AddEntry from './components/AddEntry'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
@@ -90,7 +90,12 @@ const MainNavigator = createStackNavigator({
 
 const MainNavigatorContainer = createAppContainer(MainNavigator)
 
-export default class App extends React.Component {
+export default class App extends Component {
+
+  componentDidMount() {
+    YellowBox.ignoreWarnings(['Warning: Failed prop type: The prop `bounces` is marked as required in `PagerAndroid`, but its value is `undefined`.'])
+  }
+
   render() {
     const store = createStore(reducer, middleware)
 

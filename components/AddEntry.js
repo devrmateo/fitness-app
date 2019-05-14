@@ -10,6 +10,7 @@ import TextButton from './TextButton'
 import { submitEntry, removeEntry } from '../utils/api'
 import { addEntry,  } from '../actions'
 import { white, purple } from '../utils/colors'
+import { NavigationActions } from 'react-navigation'
 
 function SubmitBtn ({ onPress }) {
   return (
@@ -73,6 +74,8 @@ class AddEntry extends Component {
       [key]: entry
     })
 
+    submitEntry(key, entry)
+
     this.setState({
       run: 0,
       bike: 0,
@@ -81,9 +84,7 @@ class AddEntry extends Component {
       eat: 0,
     })
 
-    //Navigate to home
-
-    submitEntry(key, entry)
+    this.toHome()
 
     //Clear local notification
 
@@ -96,9 +97,16 @@ class AddEntry extends Component {
     addEntry({
       [key]: getDailyReminderValue()
     })
-    //Route to home
+
+    this.toHome()
 
     removeEntry(key)
+  }
+
+  toHome = () => {
+    this.props.navigation.dispatch(NavigationActions.back({
+      key: 'AddEntry'
+    }))
   }
 
   render() {
