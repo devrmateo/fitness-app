@@ -15,7 +15,7 @@ In order to run this application on your local computer, do the following:
      - Launch a command line tool, such as Terminal.
      - Navigate to the project's root directory, and run the following commands:
           * `npm install`
-          * `npm start`
+          * `expo start`
      - Visit the site in your browser at `http://localhost:19002/`.
 
 # Dependencies
